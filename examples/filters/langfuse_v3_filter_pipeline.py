@@ -1,7 +1,7 @@
 """
 title: Langfuse Filter Pipeline for v3
-author: open-webui v.0.0.1 - (@rgaricano rev.0.0.2)
-date: 2025-07-31
+author: open-webui
+date: 2025-12-07
 version: 0.0.2
 license: MIT
 description: A filter pipeline that uses Langfuse v3.
