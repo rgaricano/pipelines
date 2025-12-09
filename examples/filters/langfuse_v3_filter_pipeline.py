@@ -307,12 +307,14 @@ class Pipeline:
         if assistant_message_obj:
             info = assistant_message_obj.get("usage", {})
             if isinstance(info, dict):
-                input_tokens = info.get("prompt_eval_count") or info.get("prompt_tokens")
-                output_tokens = info.get("eval_count") or info.get("completion_tokens")
-                if input_tokens is not None and output_tokens is not None:
+                input_tokens = info.get("prompt_eval_count") or info.get("prompt_tokens") or info.get("input_tokens")
+                output_tokens = info.get("eval_count") or info.get("completion_tokens") or info.get("output_tokens")
+                if input_tokens is not None or output_tokens is not None:
                     usage_details = {
-                        "input": input_tokens,
-                        "output": output_tokens,
+                        "input": int(input_tokens) if input_tokens is not None else 0,
+                        "output": int(output_tokens) if output_tokens is not None else 0,
+                        "total": (int(input_tokens) if input_tokens is not None else 0) +   
+                                  (int(output_tokens) if output_tokens is not None else 0),
                     }
                     self.log(f"Usage data extracted: {usage_details}")
 
